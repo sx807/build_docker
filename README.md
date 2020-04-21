@@ -1,5 +1,12 @@
 # build_docker
 
+从Github上获取项目
+
+```sh
+# --recursive 用于拉取子项目
+sudo git clone --recursive https://github.com/sx807/build_docker.git
+```
+
 项目请放置于系统 /opt 路径下，项目中配置文件及命令所用路径为绝对路径
 
 ## 安装docker
@@ -73,3 +80,6 @@ sudo docker run -d --net=host --name graph_egg -v /opt/build_docker/egg/logs:/op
 ```sh
 sudo docker run -p 3000:80 -d --name graph_nginx -v /opt/build_docker/nginx/default.conf:/etc/nginx/conf.d/default.conf -v /opt/build_docker/dist:/usr/share/nginx/html -v /opt/build_docker/nginx/logs:/var/log/nginx -d nginx
 ```
+
+* 注：如遇到nginx连接node被拒绝 需要修改nginx配置文件中的node服务器ip为对应容器的ip。
+* 注2：如需配置多个node服务器进行负载均衡，也通过修改nginx的配置文件，将服务器列表增加到upsteam中，并配置服务器权重。
