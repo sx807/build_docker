@@ -1,3 +1,6 @@
 [submodule "egg"]
 	path = egg
 	url = https://github.com/sx807/egg-api-server.git
+[submodule "vue"]
+	path = vue
+	url = https://github.com/sx807/vue-callgraph.git
