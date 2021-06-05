@@ -84,6 +84,12 @@ cd /opt/build_docker/egg
 sudo docker build -t node/egg-server .
 # 启动镜像，并映射文件夹
 sudo docker run -d --net=host --name graph_egg -v /opt/build_docker/egg/logs/egg:/opt/egg/logs/egg node/egg-server
+
+cd /opt/build_docker/vue
+# 根据dockerfile创建镜像，注意末尾有 "."，启动后会进行node插件安装，不同网络需要时间不同
+sudo docker build -t node/vue .
+# 启动镜像，并映射文件夹
+sudo docker run -d --name graph_vue -v /opt/build_docker/dist:/opt/vue/dist node/vue
 ```
 
 ## nginx
