@@ -57,6 +57,19 @@ ALTER USER 'node'@'%' IDENTIFIED WITH mysql_native_password BY 'node';
 use callgraph;
 set names utf8mb4;
 source /tmp/callgraph-200410.sql;
+
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` VARCHAR(100) NOT NULL,
+  `data` json NOT NULL,
+  `expanded` json,
+  PRIMARY KEY ( `id` )
+);
+
+CREATE TABLE IF NOT EXISTS `share` (
+  `id` VARCHAR(100) NOT NULL,
+  `data` json NOT NULL,
+  PRIMARY KEY ( `id` )
+);
 ```
 
 ## nodejs
@@ -70,7 +83,7 @@ cd /opt/build_docker/egg
 # 根据dockerfile创建镜像，注意末尾有 "."，启动后会进行node插件安装，不同网络需要时间不同
 sudo docker build -t node/egg-server .
 # 启动镜像，并映射文件夹
-sudo docker run -d --net=host --name graph_egg -v /opt/build_docker/egg/logs:/opt/egg/logs node/egg-server
+sudo docker run -d --net=host --name graph_egg -v /opt/build_docker/egg/logs/egg:/opt/egg/logs/egg node/egg-server
 ```
 
 ## nginx
