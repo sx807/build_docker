@@ -1,5 +1,39 @@
 # build_docker
 
+项目用于快速部署基于node.js的源代码分析平台前端、后端和数据库的服务器内容。
+
+## 部署脚本
+
+### 1 首先需要部署mysql，并手动初始化
+
+```sh
+
+sudo ./0_init_mysql.sh
+```
+### 2 手动执行初始化命令
+
+```sh
+sudo docker exec -it graph_mysql bash /tmp/init.sh
+```
+
+### 3 执行部署脚本
+
+```sh
+sudo ./1_install.sh
+```
+
+### 部署测试
+
+部署机器浏览器访问：127.0.0.1:7001
+
+返回“hi egg”，即为成功。
+
+部署机器浏览器访问：127.0.0.1:3000
+
+返回页面内容，即为成功。
+
+## 手动部署
+
 从Github上获取项目
 
 ```sh
@@ -56,20 +90,21 @@ grant all privileges on `callgraph`.* to 'node'@'%';
 ALTER USER 'node'@'%' IDENTIFIED WITH mysql_native_password BY 'node';
 use callgraph;
 set names utf8mb4;
-source /tmp/callgraph-200410.sql;
+source /tmp/callgraph-200410.sql; # or callgraph_210603.sql
 
-CREATE TABLE IF NOT EXISTS `history` (
-  `id` VARCHAR(100) NOT NULL,
-  `data` json NOT NULL,
-  `expanded` json,
-  PRIMARY KEY ( `id` )
-);
+# 创建历史表和分享表，更换210603.sql后，无需手动执行 
+# CREATE TABLE IF NOT EXISTS `history` (
+#   `id` VARCHAR(100) NOT NULL,
+#   `data` json NOT NULL,
+#   `expanded` json,
+#   PRIMARY KEY ( `id` )
+# );
 
-CREATE TABLE IF NOT EXISTS `share` (
-  `id` VARCHAR(100) NOT NULL,
-  `data` json NOT NULL,
-  PRIMARY KEY ( `id` )
-);
+# CREATE TABLE IF NOT EXISTS `share` (
+#   `id` VARCHAR(100) NOT NULL,
+#   `data` json NOT NULL,
+#   PRIMARY KEY ( `id` )
+# );
 ```
 
 ## nodejs

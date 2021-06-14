@@ -9,10 +9,12 @@ docker cp $(pwd)/mysql/init.sh graph_mysql:/tmp
 # 进入容器，并使用bash 
 docker exec -it graph_mysql chmod 775 /tmp/init.sh
 
-# TODO
+# TODO shell脚本执行命令，存在问题，需要改进
 # 20210606
 #docker exec -it graph_mysql bash /tmp/init.sh
 
+
+# init脚本，外部执行命令如下
 #HOST="127.0.0.1"
 #POST="3306"
 #USERNAME="root"
